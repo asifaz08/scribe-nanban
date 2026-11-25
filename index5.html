@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scribe Nanban – உங்கள் தேர்வு நண்பன்</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Noto+Sans+Tamil:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f5ff;--sf:#fff;--fg:#14142e;--mu:#585877;--ac:#4338ca;--ac2:#7c3aed;--on:#fff;--am:#f59e0b;--ok:#16a34a;--no:#e11d48;--ln:#e3dff5;--hl:#00bcd4;--sh:0 8px 24px rgba(67,56,202,.12)}
+body.dk{--bg:#000;--sf:#111;--fg:#fff;--mu:#d6d6d6;--ac:#ffd23f;--ac2:#ff9f1c;--on:#000;--ok:#2ee59d;--no:#ff5c7a;--ln:#5a5a5a;--hl:#00e5ff;--sh:none}
+body.calm{--bg:#e6f5f2;--sf:#fff;--fg:#0f2a2e;--mu:#41595c;--ac:#0f766e;--ac2:#2c7a9a;--ln:#c4e3de}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{font-size:20px}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Poppins,"Noto Sans Tamil",system-ui,sans-serif;line-height:1.5}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 5vw;background:var(--sf);border-bottom:1px solid var(--ln);position:sticky;top:0;z-index:8}
+.brand{display:flex;align-items:center;gap:14px}
+.lg{width:64px;height:64px;flex:none;border-radius:50%;background:var(--ac);color:var(--on);display:grid;place-items:center;font-size:1.8rem}
+.brand b{font-size:1.7rem;font-weight:800;display:block;line-height:1.1}.brand b span{color:var(--ac)}.brand small{font-size:1.1rem;color:var(--mu)}
+.tools{display:flex;align-items:center;gap:6px}
+.ib{font:inherit;font-size:1.1rem;background:none;border:0;color:var(--mu);cursor:pointer;padding:8px;border-radius:10px}.ib.act{color:var(--ac);font-weight:700}
+#dm{width:64px;height:64px;border-radius:18px;background:var(--bg);border:1px solid var(--ln);font-size:1.6rem;margin-left:8px}
+@media(max-width:600px){.lg,#dm{width:46px;height:46px}.brand b{font-size:1.25rem}.brand small{font-size:.85rem}}
+main{max-width:1100px;margin:auto;padding:24px 5vw 130px}
+.eye{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--mu);margin:0 0 24px}.eye i{width:10px;height:10px;border-radius:50%;background:var(--ok)}
+.hero,.begin{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+@media(max-width:800px){.hero,.begin{grid-template-columns:1fr;gap:24px}}
+.chip{display:inline-block;background:rgba(67,56,202,.1);color:var(--ac);padding:10px 18px;border-radius:99px;font-weight:600}
+h1{font-size:3rem;margin:16px 0 4px;font-weight:800;line-height:1.1}h1 em{color:var(--am);font-style:normal}
+.hero h2{font-size:2rem;margin:0 0 14px;line-height:1.25}.hero h2 b{color:var(--ac)}
+.sub{color:var(--mu);margin:0 0 10px}.sub.ta{color:var(--ac)}
+.art{position:relative;margin:0;border-radius:28px;overflow:hidden;aspect-ratio:4/3;background:linear-gradient(160deg,#ddd6fe,#fde68a);box-shadow:var(--sh)}
+.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fb{position:absolute;inset:0;display:grid;place-items:center;font-size:4.5rem}
+.art figcaption{position:absolute;left:5%;right:5%;bottom:14px;background:var(--sf);color:var(--fg);padding:12px;border-radius:18px;text-align:center;font-weight:600}
+hr{border:0;border-top:1px solid var(--ln);margin:36px 0}
+.begin{align-items:start}.num{color:var(--mu);font-weight:600;margin:0}.num b{color:var(--ac)}
+h3{font-size:1.5rem;margin:8px 0 14px}h2.t{font-size:1.7rem;margin:6px 0 14px}
+.meta,.note{text-align:center;color:var(--mu)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--mu);margin-top:34px;border-top:1px solid var(--ln);padding-top:20px}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:24px;padding:18px;margin-bottom:16px;box-shadow:var(--sh)}
+.b{position:relative;overflow:hidden;width:100%;min-height:84px;padding:12px 20px;font:inherit;font-size:1.3rem;font-weight:700;color:var(--ac);background:var(--sf);border:3px solid var(--ac);border-radius:20px;cursor:pointer;touch-action:manipulation;overflow-wrap:anywhere}
+.b:active{transform:scale(.98)}.b:disabled{opacity:.35}
+.b:focus-visible,input:focus-visible,textarea:focus-visible,.ib:focus-visible{outline:5px solid var(--fg);outline-offset:3px}
+.pr{background:var(--ac);color:var(--on)}.g{color:var(--ok);border-color:var(--ok)}.r{color:var(--no);border-color:var(--no)}
+.cd{display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;border:1px solid var(--ln);font-size:1.4rem;margin-bottom:16px;box-shadow:var(--sh)}
+.b.hl{background:var(--hl)!important;color:#000!important;border-color:#000;outline:8px solid var(--hl);outline-offset:3px}
+.b.hl::after{content:"";position:absolute;left:0;bottom:0;height:12px;width:0;background:#000}
+.b.hl.hd::after{width:100%;transition:width .8s linear}
+input,textarea{width:100%;font:inherit;font-size:1.4rem;padding:16px 20px;color:var(--fg);background:var(--sf);border:2px solid var(--ln);border-radius:20px;margin-bottom:16px}
+textarea{min-height:200px;line-height:1.6;resize:vertical;margin:0}
+label{display:block;font-weight:700;margin:8px 0}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:14px;margin-top:14px}
+.bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.pill{flex:1;min-width:9rem;text-align:center;padding:10px;font-weight:800;font-size:1.4rem;border:3px solid var(--ac);border-radius:99px;color:var(--ac);background:var(--sf)}
+.pill.low{background:var(--no);color:#fff;border-color:var(--no);animation:bk 1s infinite}@keyframes bk{50%{opacity:.6}}
+#qn{color:var(--ac);font-weight:700;text-transform:uppercase;font-size:1rem}#qx{font-size:1.6rem;font-weight:800}#qt{color:var(--mu);font-weight:600}
+#enc{color:var(--ok);font-weight:600;margin-top:8px}
+#pg{height:12px;background:var(--ln);border-radius:9px;margin-top:12px;overflow:hidden}#pf{height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .4s}
+#pic{text-align:center;font-size:5rem}
+#ch{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));gap:14px;margin:14px 0}
+.cb{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px;color:var(--fg);border-color:var(--ln)}
+.cb b{font-size:4.2rem;line-height:1.1}.cb.sel{border-color:var(--ok);color:var(--ok);box-shadow:0 0 0 5px var(--ok)}.cb.sel::before{content:"✔"}
+.mic{min-height:120px;font-size:2rem;border-color:transparent;background:linear-gradient(135deg,var(--ac),var(--ac2));color:var(--on);margin:6px 0 14px}
+.mic.on{background:var(--no);color:#fff;animation:pl 1.5s infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(225,29,72,.6)}100%{box-shadow:0 0 0 24px rgba(225,29,72,0)}}
+#im{min-height:1.5em;color:var(--mu);font-style:italic;margin-top:6px}
+.v{font-size:2rem;font-weight:800;color:var(--ac)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:14px}.stat{text-align:center;margin:0}.stat b{display:block;font-size:2.2rem;color:var(--ac)}
+.an{white-space:pre-wrap;font-size:1.3rem;overflow-wrap:anywhere}.an h4{margin:0 0 4px;color:var(--ac);font-size:1.05rem}
+#v-br{text-align:center}#bc{width:200px;height:200px;margin:30px auto;border-radius:50%;background:radial-gradient(circle,var(--ac2),var(--ac));animation:bz 8s ease-in-out infinite}
+@keyframes bz{0%,100%{transform:scale(.7)}50%{transform:scale(1.25)}}#btx{font-size:2rem;font-weight:800;color:var(--ac);min-height:1.5em}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:9;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 5vw;background:var(--sf);border-top:1px solid var(--ln);font-size:1.15rem}
+#bar span:first-child{display:flex;align-items:center;gap:12px;font-weight:600}.ck{width:38px;height:38px;flex:none;border-radius:50%;background:rgba(22,163,74,.15);color:var(--ok);display:grid;place-items:center}
+#bar .pc{color:var(--mu)}@media(max-width:700px){#bar .pc{display:none}}
+body.rm *{animation:none!important}@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<header class="top">
+ <div class="brand"><div class="lg">✎</div><div><b>Scribe <span>Nanban</span></b><small>உங்கள் தேர்வு நண்பன்</small></div></div>
+ <div class="tools"><button class="ib" id="le">English</button><span>/</span><button class="ib" id="lt">தமிழ்</button><button class="ib" id="dm" aria-label="Theme">🌙</button></div>
+</header>
+<main>
+<section id="v-start">
+ <p class="eye"><i></i><span>A LITTLE SUPPORT. A LOT OF POSSIBILITY.</span></p>
+ <div class="hero">
+  <div><span class="chip">✦ Hello, friend! · வணக்கம்!</span>
+   <h1>Scribe Nanban<em>.</em></h1>
+   <h2>Speak. We write.<br><b>You succeed.</b></h2>
+   <p class="sub">A friendly hand for your exam.<br>Your ideas deserve to be heard.</p>
+   <p class="sub ta">பேசுங்கள். நாங்கள் எழுதுகிறோம்.<br>நீங்கள் வெற்றி பெறுவீர்கள்.</p></div>
+  <figure class="art"><div class="fb">🧑‍🦽🦉📚</div><img src="hero.png" alt="A student writing an exam with a friendly owl" onerror="this.remove()"><figcaption>✦ A friend by your side, every step.</figcaption></figure>
+ </div>
+ <hr>
+ <div class="begin">
+  <div><p class="num"><b>01</b> <span data-i="begin"></span></p><h3 data-i="nameq"></h3>
+   <input id="nm" autocomplete="off"><button id="go" class="b pr cd" data-s style="margin-bottom:10px"><span data-i="start"></span><span>→</span></button><p class="meta" id="meta"></p></div>
+  <div><button id="gs" class="b cd" data-s><span data-i="settings"></span><span>→</span></button>
+   <button id="sw0" class="b cd" data-s><span id="sw0t"></span><span>→</span></button>
+   <p class="note">🛡 <span data-i="c1"></span><br><span data-i="c2"></span></p></div>
+ </div>
+ <div class="foot"><span>♡ <span data-i="f1"></span></span><span data-i="f2"></span></div>
+</section>
+
+<section id="v-exam" hidden>
+ <div class="bar"><div class="pill" id="tm"></div><div class="pill" id="wc"></div></div>
+ <div class="card"><div id="qn"></div><div id="qx"></div><div id="qt"></div><div id="enc"></div><div id="pg"><div id="pf"></div></div></div>
+ <div id="pic" class="card"></div>
+ <button id="hq" class="b" data-s data-i="hear"></button>
+ <div id="ch"></div>
+ <button id="mic" class="b mic" data-s></button>
+ <div id="aw"><label for="ans" data-i="ans"></label><textarea id="ans"></textarea></div>
+ <div id="im"></div>
+ <div class="row">
+  <button id="rd" class="b" data-s></button><button id="pv" class="b" data-s data-i="prev"></button><button id="nx" class="b" data-s data-i="next"></button>
+  <button id="dl" class="b r" data-s></button><button id="sb" class="b g" data-s data-i="sub"></button><button id="br" class="b" data-s data-i="br"></button>
+  <button id="rs" class="b" data-s data-i="res"></button><button id="se" class="b" data-s data-i="settings"></button><button id="sw" class="b" data-s></button>
+ </div>
+ <details class="card" style="margin-top:16px"><summary><b data-i="help"></b></summary><ul>
+  <li>Voice (whole phrase): <b>read again</b>, <b>delete last sentence</b>, <b>submit</b>, <b>next question</b>, <b>previous question</b>, <b>option one / two / three</b> or the picture name.</li>
+  <li>தமிழ்: மீண்டும் படி, கடைசி வாக்கியத்தை நீக்கு, சமர்ப்பி, அடுத்த கேள்வி, முந்தைய கேள்வி, ஒன்று / இரண்டு / மூன்று.</li>
+  <li>Switch mode: a highlight scans the buttons. <b>Hold the spacebar</b> about 1 second to select.</li></ul></details>
+</section>
+
+<section id="v-br" class="card" hidden>
+ <h2 class="t">🌬️ <span data-i="bt"></span></h2><div id="bc"></div><div id="btx"></div><p data-i="bn"></p>
+ <button id="bb" class="b" data-s data-i="back"></button>
+</section>
+
+<section id="v-set" hidden>
+ <h2 class="t">⚙️ <span data-i="settings"></span></h2>
+ <div class="card"><b data-i="scan"></b><div class="v" id="s1"></div><div class="row"><button id="sf" class="b" data-s data-i="fast"></button><button id="ss" class="b" data-s data-i="slow"></button></div></div>
+ <div class="card"><b data-i="txt"></b><div class="v" id="s2"></div><div class="row"><button id="fd" class="b" data-s data-i="sm"></button><button id="fu" class="b" data-s data-i="lgr"></button></div></div>
+ <div class="card"><div class="row" style="margin:0"><button id="th" class="b" data-s></button><button id="au" class="b" data-s></button><button id="rm" class="b" data-s></button><button id="kd" class="b" data-s></button><button id="ex" class="b" data-s></button></div></div>
+ <button id="sbk" class="b" data-s data-i="back"></button>
+</section>
+
+<section id="v-res" hidden>
+ <h2 class="t">📊 <span data-i="resh"></span></h2><div class="stats" id="stats"></div>
+ <div class="row"><button id="rb" class="b" data-s data-i="bke"></button><button id="rsu" class="b g" data-s data-i="ss"></button><button id="ne" class="b r" data-s></button></div>
+</section>
+
+<section id="v-sub" hidden>
+ <h2 class="t">✅ <span data-i="allans"></span></h2><div id="all"></div>
+ <div class="row"><button id="cp" class="b g" data-s data-i="cp"></button><button id="sr" class="b" data-s data-i="res"></button><button id="sbb" class="b" data-s data-i="bke"></button></div>
+</section>
+</main>
+<div id="bar" role="status" aria-live="polite"><span><span class="ck">✓</span><span id="st"></span></span><span class="pc">🛡 <span data-i="pace"></span></span></div>
+
+<script>
+(()=>{
+const $=i=>document.getElementById(i),SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+const BASE=1200,HOLD=800,TH=['light','dark','calm'],EX=[0,25,50];
+const D={
+begin:["LET'S BEGIN","தொடங்கலாம்"],nameq:["What should we call you?","உங்களை எப்படி அழைக்கலாம்?"],nmph:["Your name","உங்கள் பெயர்"],
+start:["Start exam","தேர்வைத் தொடங்கு"],settings:["Settings","அமைப்புகள்"],sw:["Switch mode","ஸ்விட்ச் முறை"],
+c1:["A calm space. No pressure.","அமைதியான இடம். அழுத்தம் இல்லை."],c2:["You're in control, always.","கட்டுப்பாடு எப்போதும் உங்களிடமே."],
+f1:["Made for every kind of learner.","ஒவ்வொரு மாணவருக்காகவும்."],f2:["One question. One answer. One step at a time.","ஒரு கேள்வி. ஒரு பதில். ஒரு படி."],
+ready:["Ready when you are. Take your time.","தயாரானதும் தொடங்குங்கள். அவசரம் இல்லை."],pace:["Your space. Your pace.","உங்கள் இடம். உங்கள் வேகம்."],
+qs:["questions","கேள்விகள்"],min:["minutes","நிமிடங்கள்"],yp:["Your pace","உங்கள் வேகம்"],
+q:["Question","கேள்வி"],of:["of","/"],hear:["🔊 Hear the question","🔊 கேள்வியைக் கேள்"],opt:["Option","விருப்பம்"],
+m1:["🎤 Start","🎤 தொடங்கு"],m0:["⏹ Stop","⏹ நிறுத்து"],ans:["Your answer","உங்கள் பதில்"],ph:["Your spoken words appear here…","நீங்கள் பேசுவது இங்கே தோன்றும்…"],
+read:["🔊 Read","🔊 படி"],stopr:["⏹ Stop reading","⏹ படிப்பதை நிறுத்து"],prev:["⬅ Previous","⬅ முந்தையது"],next:["Next ➡","அடுத்தது ➡"],
+dl:["⌫ Delete last sentence","⌫ கடைசி வாக்கியத்தை நீக்கு"],cl:["⌫ Clear my choice","⌫ என் தேர்வை அழி"],sub:["✅ Submit","✅ சமர்ப்பி"],
+br:["🌬️ Take a breath","🌬️ மூச்சு விடுங்கள்"],res:["📊 Results","📊 முடிவுகள்"],help:["Help","உதவி"],w:["Words","சொற்கள்"],all:["all","மொத்தம்"],ansd:["Answered","பதிலளித்தவை"],
+bt:["Take a breath","மூச்சு விடுங்கள்"],bin:["Breathe in…","மூச்சை உள்ளிழுங்கள்…"],bout:["Breathe out…","மூச்சை வெளிவிடுங்கள்…"],
+bn:["No rush. Your timer is paused and your answers are safe.","அவசரம் இல்லை. நேரம் நிறுத்தப்பட்டுள்ளது, பதில்கள் பாதுகாப்பாக உள்ளன."],back:["⬅ Back","⬅ திரும்பு"],
+scan:["Scan speed","ஸ்கேன் வேகம்"],txt:["Text size","எழுத்தின் அளவு"],fast:["➖ Faster","➖ வேகமாக"],slow:["➕ Slower","➕ மெதுவாக"],sm:["A− Smaller","A− சிறியது"],lgr:["A+ Larger","A+ பெரியது"],
+sec:["seconds","விநாடிகள்"],theme:["🎨 Theme","🎨 தீம்"],auto:["🔊 Read questions aloud","🔊 கேள்விகளை உரக்கப் படி"],rm:["🌀 Reduce motion","🌀 அசைவைக் குறை"],
+kd:["💬 Encouraging messages","💬 ஊக்க வார்த்தைகள்"],ex:["⏱ Extra time","⏱ கூடுதல் நேரம்"],ON:["ON","ஆன்"],OFF:["OFF","ஆஃப்"],
+light:["Light","ஒளி"],dark:["High contrast","அதிக மாறுபாடு"],calm:["Calm","அமைதி"],
+resh:["Results","முடிவுகள்"],wpm:["Words per minute","நிமிடத்திற்கு சொற்கள்"],used:["Time used","பயன்படுத்திய நேரம்"],allowed:["Time allowed","அனுமதித்த நேரம்"],
+edits:["Edits","திருத்தங்கள்"],tw:["Total words","மொத்த சொற்கள்"],pc:["Picture questions correct","சரியான பட விடைகள்"],bke:["⬅ Back to exam","⬅ தேர்வுக்குத் திரும்பு"],
+ss:["✅ Submit screen","✅ சமர்ப்பிப்புத் திரை"],ne:["🔄 New exam","🔄 புதிய தேர்வு"],ne2:["⚠ Select again to erase all","⚠ அழிக்க மீண்டும் தேர்ந்தெடுக்கவும்"],
+allans:["All answers","அனைத்து பதில்கள்"],cp:["📋 Copy all","📋 அனைத்தையும் நகலெடு"],noans:["(no answer)","(பதில் இல்லை)"],
+listen:["Listening… speak now.","கேட்கிறேன்… பேசுங்கள்."],stopped:["Stopped.","நிறுத்தப்பட்டது."],reading:["Reading…","படிக்கிறேன்…"],done:["Done reading.","படித்து முடிந்தது."],
+nothr:["Nothing to read yet.","படிக்க எதுவும் இல்லை."],nodel:["Nothing to delete.","நீக்க எதுவும் இல்லை."],deld:["Last sentence deleted.","கடைசி வாக்கியம் நீக்கப்பட்டது."],
+clr:["Choice cleared.","தேர்வு அழிக்கப்பட்டது."],tup:["⏰ Time is up. Your answers are locked and ready to submit.","⏰ நேரம் முடிந்தது. பதில்கள் பூட்டப்பட்டு சமர்ப்பிக்கத் தயார்."],
+swon:["Switch mode ON. Hold the spacebar to select.","ஸ்விட்ச் முறை ஆன். தேர்ந்தெடுக்க ஸ்பேஸ்பாரை அழுத்திப் பிடிக்கவும்."],swoff:["Switch mode OFF.","ஸ்விட்ச் முறை ஆஃப்."],
+copied:["✔ Copied to the clipboard.","✔ நகலெடுக்கப்பட்டது."],cfail:["Could not copy. Please select the text and copy it.","நகலெடுக்க முடியவில்லை. உரையைத் தேர்ந்து நகலெடுக்கவும்."],
+chose:["You chose: ","நீங்கள் தேர்ந்தெடுத்தது: "],revw:["Review your answers, then press “Copy all”.","பதில்களைச் சரிபார்த்து, “அனைத்தையும் நகலெடு” அழுத்தவும்."],
+lastq:["This is the last question.","இதுவே கடைசி கேள்வி."],firstq:["This is the first question.","இதுவே முதல் கேள்வி."],
+nosr:["Speech recognition is not supported here. Use Chrome, Edge or Safari.","இங்கே பேச்சு அறிதல் இல்லை. Chrome, Edge அல்லது Safari பயன்படுத்தவும்."],
+blk:["Microphone is blocked. Please allow access.","மைக்ரோஃபோன் தடுக்கப்பட்டுள்ளது. அனுமதி வழங்கவும்."],hint:["Say “option one”, “two” or “three”.","“ஒன்று”, “இரண்டு” அல்லது “மூன்று” என்று சொல்லுங்கள்."]};
+const Q=[
+{t:'choose',x:'Which one is a fruit?',ta:'எது ஒரு பழம்?',p:'🧺',c:[['🚗','Car','கார்'],['🍎','Apple','ஆப்பிள்'],['⚽','Ball','பந்து']],ok:1},
+{t:'choose',x:'Which animal gives us milk?',ta:'எந்த விலங்கு பால் தருகிறது?',p:'🥛',c:[['🐄','Cow','பசு'],['🐘','Elephant','யானை'],['🐍','Snake','பாம்பு']],ok:0},
+{t:'describe',x:'Look at the picture. Say what you see.',ta:'படத்தைப் பார்த்து சொல்லுங்கள்.',p:'🏠🌳☀️🐦'},
+{t:'text',x:'Explain why clean water is important.',ta:'சுத்தமான நீர் ஏன் முக்கியம்?'}];
+const KM=[['No rush. You are doing well.','அவசரம் இல்லை. நன்றாகச் செய்கிறீர்கள்.'],['Take your time. Your answers are saved.','நிதானமாக எழுதுங்கள். பதில்கள் சேமிக்கப்படுகின்றன.'],['One question at a time. You can do this.','ஒரு நேரத்தில் ஒரு கேள்வி. உங்களால் முடியும்.'],['Need a pause? Use the breathing button.','ஓய்வு வேண்டுமா? மூச்சு பொத்தானைப் பயன்படுத்துங்கள்.']];
+const fresh=()=>({name:'',a:Q.map(()=>''),q:0,el:0,st:false,ed:0});
+const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let S=Object.assign({scan:1.5,fs:20,theme:'light',lang:'en-IN',auto:true,rm:false,kind:true,extra:0},ld('sn2-s')||{}),E=fresh(),view='start',bI=null,bn=0,ki=0;
+if(!TH.includes(S.theme))S.theme='light';if(!EX.includes(S.extra))S.extra=0;if(S.lang!='ta-IN')S.lang='en-IN';
+const e0=ld('sn2-e');if(e0&&e0.a&&e0.a.length==Q.length)E=Object.assign(fresh(),e0);
+const ta=()=>S.lang=='ta-IN',t=k=>D[k][ta()?1:0],sE=()=>sv('sn2-e',E),st=x=>$('st').textContent=x,cq=()=>Q[E.q];
+const wd=x=>x.trim().split(/\s+/).filter(Boolean).length,fm=s=>String(s/60|0).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+const lim=()=>Math.round(BASE*(1+S.extra/100)),up=()=>E.el>=lim(),onoff=v=>t(v?'ON':'OFF');
+const tw=()=>E.a.reduce((n,a,i)=>n+(Q[i].t=='choose'?0:wd(a)),0);
+const ps=()=>{let n=0,c=0;Q.forEach((q,i)=>{if(q.t=='choose'){n++;if(E.a[i]==q.c[q.ok][1])c++}});return{n,c}};
+
+/* views */
+function show(n){clearInterval(bI);if(n!='exam')stopMic();stopSp();view=n;
+ ['start','exam','set','res','sub','br'].forEach(v=>$('v-'+v).hidden=v!=n);
+ draw();scrollTo(0,0);if(on){idx=-1;tick();rst()}}
+function draw(){({exam:rEx,set:rSet,res:rRes,sub:rSub,start:rSt,br:rBr})[view]()}
+function rSt(){$('meta').textContent=Q.length+' '+t('qs')+' · '+Math.round(lim()/60)+' '+t('min')+' · '+t('yp')}
+function rTm(){const l=Math.max(0,lim()-E.el);$('tm').textContent='⏱ '+fm(l);$('tm').classList.toggle('low',E.st&&l<=60)}
+function cnt(){$('wc').textContent=cq().t=='choose'?t('ansd')+': '+E.a.filter(Boolean).length+'/'+Q.length:t('w')+': '+wd(E.a[E.q])+' ('+t('all')+' '+tw()+')';rTm()}
+function enc(){$('enc').textContent=S.kind?KM[ki++%KM.length][ta()?1:0]:''}
+function rEx(){const q=cq(),ch=q.t=='choose';
+ $('qn').textContent=t('q')+' '+(E.q+1)+' '+t('of')+' '+Q.length;$('qx').textContent=q.x;$('qt').textContent=q.ta;enc();
+ $('pf').style.width=(E.q+1)/Q.length*100+'%';$('pic').hidden=!q.p;$('pic').textContent=q.p||'';
+ const b=$('ch');b.textContent='';b.hidden=!ch;
+ if(ch)q.c.forEach((c,i)=>{const x=document.createElement('button');x.className='b cb';x.setAttribute('data-s','');
+  x.innerHTML='<span></span><b></b><span></span><span></span>';const s=x.children;
+  s[0].textContent=t('opt')+' '+(i+1);s[1].textContent=c[0];s[2].textContent=c[1];s[3].textContent=c[2];x.onclick=()=>pick(i);b.append(x)});
+ mark();$('aw').hidden=ch;$('dl').textContent=t(ch?'cl':'dl');
+ $('ans').value=ch?'':E.a[E.q];$('ans').readOnly=up();$('pv').disabled=!E.q;$('nx').disabled=E.q==Q.length-1;$('im').textContent='';cnt();ui();stopSpUi()}
+function mark(){const q=cq();[...$('ch').children].forEach((b,i)=>{b.classList.toggle('sel',!!q.c&&E.a[E.q]==q.c[i][1]);b.disabled=up()})}
+function rSet(){$('s1').textContent=S.scan.toFixed(1)+' '+t('sec');$('s2').textContent=S.fs+' px';
+ $('th').textContent=t('theme')+': '+t(S.theme);$('au').textContent=t('auto')+': '+onoff(S.auto);$('rm').textContent=t('rm')+': '+onoff(S.rm);
+ $('kd').textContent=t('kd')+': '+onoff(S.kind);$('ex').textContent=t('ex')+': +'+S.extra+'%'}
+function rRes(){const x=tw(),w=E.el?Math.round(x/(E.el/60)):0,p=ps(),b=$('stats');b.textContent='';
+ const add=(l,v)=>{const d=document.createElement('div');d.className='card stat';d.innerHTML='<b></b><span></span>';d.children[0].textContent=v;d.children[1].textContent=l;b.append(d)};
+ add(t('wpm'),w);add(t('used'),fm(E.el));add(t('allowed'),fm(lim()));add(t('edits'),E.ed);add(t('tw'),x);if(p.n)add(t('pc'),p.c+' / '+p.n);
+ $('ne').textContent=t('ne')}
+function rSub(){const b=$('all');b.textContent='';Q.forEach((q,i)=>{const c=document.createElement('div');c.className='card an';
+ const a=E.a[i].trim(),ch=q.c&&q.c.find(x=>x[1]==a);c.innerHTML='<h4></h4><div></div>';
+ c.children[0].textContent='Q'+(i+1)+'. '+q.x;c.children[1].textContent=a?(ch?ch[0]+' '+ch[1]+' / '+ch[2]:a):t('noans');b.append(c)})}
+function rBr(){bn=0;const f=()=>{$('btx').textContent=t(bn++%2?'bout':'bin')};f();bI=setInterval(f,4000)}
+
+/* answers */
+function setA(v){E.a[E.q]=v;$('ans').value=v;$('ans').scrollTop=1e6;cnt();sE()}
+const go=()=>{if(!E.st){E.st=true;sE()}};
+function add(x){if(up()||cq().t=='choose')return;x=x.trim();if(!x)return;x=x[0].toUpperCase()+x.slice(1);if(!/[.!?।]$/.test(x))x+='.';go();const c=E.a[E.q].trim();setA((c?c+' ':'')+x)}
+function del(){if(up())return st(t('tup'));const v=E.a[E.q].trim();if(!v)return st(t('nodel'));
+ if(cq().t=='choose'){E.a[E.q]='';E.ed++;sE();mark();cnt();return st(t('clr'))}
+ const b=v.replace(/[.!?।]+$/,''),i=Math.max(b.lastIndexOf('.'),b.lastIndexOf('!'),b.lastIndexOf('?'),b.lastIndexOf('।'));
+ setA(i<0?'':v.slice(0,i+1));E.ed++;sE();st(t('deld'))}
+$('ans').addEventListener('input',()=>{go();E.ed++;E.a[E.q]=$('ans').value;cnt();sE()});
+function pick(k){const q=cq();if(up())return st(t('tup'));go();const l=q.c[k][1];if(E.a[E.q]&&E.a[E.q]!=l)E.ed++;E.a[E.q]=l;sE();mark();cnt();
+ const nm=ta()?q.c[k][2]:l;st(t('chose')+q.c[k][0]+' '+nm);if(!listening)speak(t('chose')+nm)}
+const NUM={one:0,1:0,ஒன்று:0,two:1,to:1,too:1,2:1,இரண்டு:1,three:2,3:2,மூன்று:2};
+function mc(n){const q=cq();if(q.t!='choose')return -1;const s=n.replace(/^(option|number|choose|select|pick)\s+/,'').trim();
+ const k=s in NUM?NUM[s]:q.c.findIndex(c=>c[1].toLowerCase()==s||c[2]==s);return k>=0&&k<q.c.length?k:-1}
+
+/* speech out */
+let sp=false,cu=null,rA=false;
+function stopSpUi(){$('rd').textContent=t(sp?'stopr':'read')}
+function stopSp(){cu=null;sp=false;stopSpUi();if(window.speechSynthesis)speechSynthesis.cancel()}
+function speak(x,f){if(!window.speechSynthesis)return;stopSp();
+ const u=new SpeechSynthesisUtterance(x);u.lang=S.lang;u.rate=.95;
+ u.onend=u.onerror=()=>{if(cu!==u)return;cu=null;sp=false;stopSpUi();f&&f()};cu=u;sp=true;stopSpUi();speechSynthesis.speak(u)}
+function qs(){const q=cq();let x=ta()?q.ta:q.x;if(q.t=='choose')q.c.forEach((c,i)=>x+=' '+t('opt')+' '+(i+1)+': '+(ta()?c[2]:c[1])+'.');return x}
+function rdA(w){if(sp){const r=rA;rA=false;stopSp();if(r&&view=='exam')startMic();return st(t('stopped'))}
+ const q=cq(),a=E.a[E.q].trim(),x=w=='q'||q.t=='choose'?qs()+(a&&q.t=='choose'&&w!='q'?' '+t('chose')+a+'.':''):a;
+ if(!x)return st(t('nothr'));rA=listening;stopMic();st(t('reading'));
+ speak(x,()=>{const r=rA;rA=false;if(r&&view=='exam')startMic();else st(t('done'))})}
+function goQ(d){const n=E.q+d;if(n<0||n>=Q.length)return st(t(d>0?'lastq':'firstq'));
+ stopSp();E.q=n;sE();rEx();fix();if(S.auto)rdA('q')}
+
+/* submit */
+function txt(){const x=tw(),w=E.el?Math.round(x/(E.el/60)):0,p=ps(),o=['Scribe Nanban – Exam Answers','Student: '+(E.name||'Student'),''];
+ Q.forEach((q,i)=>{const a=E.a[i].trim();o.push('Q'+(i+1)+'. '+q.x);o.push(q.t=='choose'?(a?a+(a==q.c[q.ok][1]?' ✔':' ✘'):'(no answer)'):a||'(no answer)');o.push('')});
+ if(p.n)o.push('Picture questions correct: '+p.c+' / '+p.n);o.push('Words: '+x+' | Time: '+fm(E.el)+' of '+fm(lim())+' (extra time +'+S.extra+'%) | WPM: '+w+' | Edits: '+E.ed);return o.join('\n')}
+function subm(){show('sub');st(t('revw'));
+ document.dispatchEvent(new CustomEvent('scribe-submit',{detail:{name:E.name,questions:Q.map(q=>q.x),answers:E.a.slice(),seconds:E.el,allowedSeconds:lim(),extraTimePercent:S.extra,edits:E.ed,pictureScore:ps(),text:txt()}}))}
+async function copy(){let ok=false;try{await navigator.clipboard.writeText(txt());ok=true}catch(e){try{const x=document.createElement('textarea');x.value=txt();document.body.append(x);x.select();ok=document.execCommand('copy');x.remove()}catch(e2){}}
+ st(t(ok?'copied':'cfail'))}
+
+/* voice commands */
+const CM={r:['read again','read it again','read','மீண்டும் படி','படி'],d:['delete last sentence','delete the last sentence','கடைசி வாக்கியத்தை நீக்கு'],
+ s:['submit','submit answer','submit answers','சமர்ப்பி'],n:['next question','அடுத்த கேள்வி'],p:['previous question','முந்தைய கேள்வி']};
+function cmd(raw){const n=raw.toLowerCase().replace(/[.,!?।]/g,'').trim().replace(/^please\s+/,'');
+ if(CM.r.includes(n)){rdA();return 1}if(CM.d.includes(n)){del();return 1}if(CM.s.includes(n)){subm();return 1}
+ if(CM.n.includes(n)){goQ(1);return 1}if(CM.p.includes(n)){goQ(-1);return 1}const k=mc(n);if(k>=0){pick(k);return 1}return 0}
+
+/* microphone */
+let listening=false,rec=null;
+function ui(){$('mic').classList.toggle('on',listening);$('mic').textContent=t(listening?'m0':'m1');if(!listening)$('im').textContent=''}
+function startMic(){if(!SR)return st(t('nosr'));if(view!='exam')return;if(up())return st(t('tup'));
+ const r=rec=new SR();r.lang=S.lang;r.continuous=true;r.interimResults=true;
+ r.onresult=e=>{let im='';for(let i=e.resultIndex;i<e.results.length;i++){const s=e.results[i];
+  if(s.isFinal){const x=s[0].transcript;if(!cmd(x)){if(cq().t=='choose')st('“'+x.trim()+'” – '+t('hint'));else add(x)}}else im+=s[0].transcript}$('im').textContent=im};
+ r.onerror=e=>{if(['not-allowed','service-not-allowed','language-not-supported'].includes(e.error)){listening=false;ui();st(e.error=='language-not-supported'?t('nosr'):t('blk'))}};
+ r.onend=()=>{if(listening&&rec===r){try{r.start()}catch(e){}}else ui()};
+ listening=true;go();try{r.start()}catch(e){}ui();st(t('listen'))}
+function stopMic(){listening=false;if(rec){try{rec.stop()}catch(e){}}ui()}
+
+/* settings, language, theme */
+function app(){document.documentElement.style.fontSize=S.fs+'px';document.documentElement.lang=ta()?'ta':'en';
+ document.body.classList.toggle('dk',S.theme=='dark');document.body.classList.toggle('calm',S.theme=='calm');document.body.classList.toggle('rm',S.rm);
+ document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
+ $('nm').placeholder=t('nmph');$('ans').placeholder=t('ph');$('le').classList.toggle('act',!ta());$('lt').classList.toggle('act',ta());
+ $('dm').textContent=S.theme=='dark'?'☀️':'🌙';$('ne').textContent=t('ne');sv('sn2-s',S);sw();draw();rTm()}
+const B=(i,f)=>$(i).onclick=f;
+B('sf',()=>{S.scan=Math.max(1,+(S.scan-.5).toFixed(1));app();rst()});B('ss',()=>{S.scan=Math.min(5,+(S.scan+.5).toFixed(1));app();rst()});
+B('fd',()=>{S.fs=Math.max(16,S.fs-2);app()});B('fu',()=>{S.fs=Math.min(30,S.fs+2);app()});
+B('th',()=>{S.theme=TH[(TH.indexOf(S.theme)+1)%TH.length];app()});B('dm',()=>{S.theme=S.theme=='dark'?'light':'dark';app()});
+B('au',()=>{S.auto=!S.auto;app()});B('rm',()=>{S.rm=!S.rm;app()});B('kd',()=>{S.kind=!S.kind;app()});
+B('ex',()=>{S.extra=EX[(EX.indexOf(S.extra)+1)%EX.length];app()});
+B('le',()=>{S.lang='en-IN';stopMic();app()});B('lt',()=>{S.lang='ta-IN';stopMic();app()});
+let ar=false,at;B('ne',()=>{const b=$('ne');if(!ar){ar=true;b.textContent=t('ne2');at=setTimeout(()=>{ar=false;b.textContent=t('ne')},10000);return}
+ clearTimeout(at);ar=false;E=fresh();sE();$('nm').value='';show('start');st(t('ready'))});
+
+/* wiring */
+B('go',()=>{E.name=$('nm').value.trim();sE();show('exam');if(S.auto)rdA('q');else st(t('ready'))});
+B('gs',()=>show('set'));B('mic',()=>{if(listening){stopMic();st(t('stopped'))}else startMic()});
+B('rd',()=>rdA());B('hq',()=>rdA('q'));B('dl',del);B('pv',()=>goQ(-1));B('nx',()=>goQ(1));B('sb',subm);
+B('br',()=>{show('br')});B('bb',()=>{show('exam');st(t('ready'))});
+B('rs',()=>show('res'));B('se',()=>show('set'));B('sbk',()=>show(E.st||E.name?'exam':'start'));B('rb',()=>show('exam'));B('rsu',subm);B('sr',()=>show('res'));B('sbb',()=>show('exam'));B('cp',copy);
+
+/* spacebar switch mode */
+let on=false,idx=-1,tm=null,hT=null,tg=null;
+const it=()=>[...document.querySelectorAll('[data-s]')].filter(b=>!b.disabled&&b.offsetParent!==null);
+function paint(){document.querySelectorAll('[data-s]').forEach(b=>b.classList.remove('hl','hd'));const b=it()[idx];if(b){b.classList.add('hl');b.scrollIntoView({block:'center',behavior:S.rm?'auto':'smooth'})}}
+function tick(){const n=it().length;if(!n)return;idx=(idx+1)%n;paint()}
+function rst(){clearInterval(tm);if(on)tm=setInterval(tick,S.scan*1000)}
+function fix(){if(on){if(idx>=it().length)idx=0;paint()}}
+function sw(){const x='⌨️ '+t('sw')+': '+onoff(on);$('sw').textContent=x;$('sw0t').textContent=x}
+function setSw(v){on=v;clearInterval(tm);idx=-1;sw();if(v){if(document.activeElement)document.activeElement.blur();tick();rst();st(t('swon'))}else{paint();st(t('swoff'))}}
+B('sw',()=>setSw(!on));B('sw0',()=>setSw(!on));
+document.addEventListener('keydown',e=>{if(!on||e.code!='Space')return;e.preventDefault();if(e.repeat||hT)return;clearInterval(tm);tg=it()[idx];if(!tg)return;
+ tg.classList.add('hd');hT=setTimeout(()=>{hT=null;tg.classList.remove('hd');tg.click()},HOLD)});
+document.addEventListener('keyup',e=>{if(!on||e.code!='Space')return;e.preventDefault();clearTimeout(hT);hT=null;if(tg)tg.classList.remove('hd');rst()});
+
+/* exam timer (runs only on the exam screen) */
+setInterval(()=>{if(view!='exam'||!E.st||up())return;E.el++;rTm();if(E.el%5==0)sE();
+ if(up()){sE();stopMic();show('sub');st(t('tup'))}},1000);
+
+app();st(SR?t('ready'):t('nosr'));if(window.speechSynthesis)speechSynthesis.getVoices();
+})();
+</script></body></html>
